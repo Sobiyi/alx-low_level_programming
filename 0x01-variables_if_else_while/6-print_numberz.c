@@ -4,7 +4,7 @@
  * main - prints single digits in base 10
  * Return: Always 0
  */
-init main(void)
+int main(void)
 {
 	int num;
 
