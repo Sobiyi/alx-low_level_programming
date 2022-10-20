@@ -2,8 +2,8 @@
 
 /**
  * times_table - print the 9 times table
+ *
  */
-
 void times_table(void)
 {
 	int num, mult, prod;
