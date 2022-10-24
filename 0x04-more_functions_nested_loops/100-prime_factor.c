@@ -2,7 +2,7 @@
 
 /**
  * main - checks prime factors of 612852475143 and
- * prints the largest;
+ * prints the largest
  *
  * Return: 0
  */
