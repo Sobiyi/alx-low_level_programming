@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - checks prime factors of 612852475143 and
- * prints the largest
+ * main - checks prime factors of 612852475143 and prints the largest
  *
  * Return: 0
  */
@@ -23,6 +22,5 @@ int main(void)
 	}
 
 	printf("%ld\n", a);
-
 	return (0);
 }
