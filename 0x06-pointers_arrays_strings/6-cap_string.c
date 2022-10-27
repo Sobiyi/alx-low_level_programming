@@ -1,34 +1,36 @@
-#include <string.h>
 #include "main.h"
 
 /**
  * cap_string - capitalizes all words of a string
  * @str: a pointer to the string
- *
  * Return: the converted string
  */
 char *cap_string(char *str)
 {
-	int i, len;
-	char prev;
-	char dest[200], *cpy;
+	int i = 0;
 
-	cpy = strcpy(dest, str);
-
-	len = strlen(cpy);
-
-	for (i = 0, i < len; i++)
+	while (str[i])
 	{
-		if ((prev < 'a' || prev > 'z') && (prev < 'A' || prev > 'Z'))
-		{
-			cpy[i] >= 'a' && cpy[i] <= 'z')
-			{
-				cpy[i] -= 32;
-			}
-		}
+		while (!(str[i] >= 'a' && str[i] <= 'z'))
+			i++;
+		if (str[i - 1] == ' ' ||
+		    str[i - 1] == '\t' ||
+		    str[i - 1] == '\n' ||
+		    str[i - 1] == ',' ||
+		    str[i - 1] == ';' ||
+		    str[i - 1] == '.' ||
+		    str[i - 1] == '!' ||
+		    str[i - 1] == '?' ||
+		    str[i - 1] == '"' ||
+		    str[i - 1] == '(' ||
+		    str[i - 1] == ')' ||
+		    str[i - 1] == '{' ||
+		    str[i - 1] == '}' ||
+		    i == 0)
+			str[i] -= 32;
 
-		prev = cpy[i];
+		i++;
 	}
 
-	return (cpy);
+	return (str);
 }
