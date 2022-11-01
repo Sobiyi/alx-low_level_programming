@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * _memset - fills the first n bytes of memory area prohibited
- * by s with the constant ntye b
+ * _memset - fills the first n bytes of memory area pointed
+ * by s with the constant byte b
  * @s: pointer to s
  * @b: constant byte
  * @n: bytes to fill
