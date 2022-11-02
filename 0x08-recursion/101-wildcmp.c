@@ -6,7 +6,7 @@
  * @s1: a pointer to the first string
  * @s2: a pointer to the second string
  *
- * Return: 1 if strings are identical and 0 if not
+ * Return: 1 if strins are identical and 0 if not
  */
 int wildcmp(char *s1, char *s2)
 {
