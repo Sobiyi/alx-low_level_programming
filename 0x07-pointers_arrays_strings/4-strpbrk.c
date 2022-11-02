@@ -14,7 +14,7 @@ char *_strpbrk(char *s, char *accept)
 	int i, j, len, len2;
 	char *c;
 
-	len = stelen(s);
+	len = strlen(s);
 	len2 = strlen(accept);
 
 	for (i = 0; i < len; i++)
