@@ -23,7 +23,7 @@ int is_palindrome(char *s)
  */
 int check_palindrome(char *s, int i)
 {
-	int len - strlen(s);
+	int len = strlen(s);
 
 	if (i == len)
 		return (1);
