@@ -27,7 +27,7 @@ char **alloc(char *str, int len, int size)
 				break;
 			}
 			if (str[j] != ' ')
-				size1++;
+				size2++;
 			prev = str[j];
 			j++;
 		}
