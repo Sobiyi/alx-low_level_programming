@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 }
 
 /**
- * check_change - checks if the minimum possible coins
+ * check_change - checks for the minum possible coins
  * @amount: amount to check
  *
  * Return: number of possible coins
@@ -60,6 +60,11 @@ int check_change(int amount)
 			amount -= 10;
 			count++;
 		}
+		else if (amount - 5 >= 0)
+		{
+			amount -= 5;
+			count++;
+		}
 		else if (amount - 2 >= 0)
 		{
 			amount -= 2;
@@ -67,7 +72,7 @@ int check_change(int amount)
 		}
 		else
 		{
-			amount -= 2;
+			amount -= 1;
 			count++;
 		}
 	}
