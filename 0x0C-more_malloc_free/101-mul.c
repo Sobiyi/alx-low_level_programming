@@ -1,214 +1,97 @@
 #include "main.h"
-#include <string.h>
-
-char *find_power_mul(int n, char *s);
-char *mul_digit(char *s, char digit);
-char *add_numbers(char *n1, char *n2, int len1, int len2);
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main - multiplies two numbers
+ * is_digit - cheacks if a string contains a non-digit char
+ * @s: sring to be evaluated
+ * Return: 0 if a non-digit is found, 1 if otherwise
+ */
+int is_digit(char *s)
+{
+	int i = 0;
+
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/**
+ * _strlen _ returns the length of a string
+ * @s: string to evaluate
+ * Return: the length of the string
+ */
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+
+	return (i);
+}
+
+/**
+ * errors - handles error for main
+ */
+void errors(void)
+{
+	printf("Error\n");
+	exit(98);
+}
+
+/**
+ * main - multiplies two positive numbers
  * @argc: number of arguments
  * @argv: array of arguments
- *
- * Return: 0 if succesfull
+ * Return: always 0 (Success)
  */
 int main(int argc, char *argv[])
 {
-	char *r, *mul, *res = "";
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
 
-	int i, j, len;
-
-	if (argc != 3)
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+		errors();
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	len = len2 + len2 + 1;
+	result = malloc(sizeof(int) * len);
+	if (!result)
+		return (1);
+	for (i = 0; i <= len1 + len2; i++)
+		result[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		printf("Error\n");
-		exit(98);
-	}
-
-	for (i = 1; i < argc; i++)
-	{
-		len = strlen(argv[i]);
-
-		for (j = 0; j < len; j++)
+		digit1 = s1[len] - '0';
+		carry = 0;
+		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
 		{
-			if (argv[i][j] < 48 || argv[i][j] > 57)
-			{
-				printf("Error\n");
-				exit(98);
-			}
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
 		}
+		if (carry > 0)
+			result[len1 + len2 + 1] += carry;
 	}
-
-	len = strlen(argv[1]);
-
-	for (i = len, j = 0; i > 0; i--, j++)
+	for (i = 0; i < len - 1; i++)
 	{
-		r = find_power_mul(i, argv[2]);
-		mul = mul_digit(r, argv[1][j]);
-
-		if (strlen(res) == 0)
-			res = mul;
-		else
-			res = add_numbers(res, mul, strlen(res), strlen(mul));
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
 	}
-
-	printf("%s\n", res);
-
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(result);
 	return (0);
-}
-
-/**
- * find_power_mul - finds how many zeros to add to a number and adds it
- * @n: number of zeros
- * @s: the string to add the zeros
- *
- * Return: a pointer to the result
- */
-char *find_power_mul(int n, char *s)
-{
-	char *res;
-	int i, len;
-
-	len = strlen(s);
-
-	res = malloc((n + len + 1) * sizeof(char));
-
-	for (i = 0; i < len; i++)
-		res[i] = s[i];
-	for (i = 0; i < n - 1; i++)
-		res[i + len] = '0';
-
-	res[i + len] = '\0';
-
-	return (res);
-}
-
-/**
- * mul_digit - multiplies a string by a digit
- * @s: the string
- * @digit: the digit
- *
- * Return: a pointer to the result
- */
-char *mul_digit(char *s, char digit)
-{
-	char *res;
-	static int d[150];
-	int i, j, len, lenr, carry, num, temp;
-
-	len = strlen(s);
-	carry = 0;
-
-	res = malloc((len + 2) * sizeof(char));
-
-	for (i = len - 1; i >= 0; i--)
-	{
-		temp = ((s[i] - 48) * (digit - 48)) + carry;
-
-		if (temp > 10)
-		{
-			num = temp % 10;
-			carry = temp / 10;
-		}
-		else
-		{
-			num = temp;
-			carry = 0;
-		}
-
-		d[i] = num;
-	}
-
-	if (carry > 0)
-		d[0] += (carry * 10);
-
-	i = 0;
-	j = 0;
-	if (d[0] > 9)
-	{
-		res[1] = (d[0] % 10) + 48;
-		res[0] = (d[0] / 10) + 48;
-		j = 2;
-		i = 1;
-	}
-
-	while (i < len)
-	{
-		res[j] = d[i] + 48;
-		i++;
-		j++;
-	}
-	lenr = strlen(res);
-	res[lenr] = '\0';
-
-	return (res);
-}
-
-/**
- * add_numbers - adds two strings
- * @n1: the first string
- * @n2: the second string
- * @len1: length of the first string
- * @len2: length of the second string
- *
- * Return: a pointer to the answer
- */
-char *add_numbers(char *n1, char *n2, int len1, int len2)
-{
-	int i, j, k, l, num, rem = 0;
-	static int d[150];
-	char *res;
-
-	res = malloc((len1 + 2) * sizeof(char));
-
-	j = len2 - 1;
-	k = len1 - len2 - 1;
-	for (i = len1 - 1; i > k; i--)
-	{
-		num = rem + (n1[i] - 48) + (n2[j] - 48);
-		if (num > 9)
-		{
-			num = num - 10;
-			rem = 1;
-		}
-		else
-		{
-			rem = 0;
-		}
-		d[i] = num;
-		j--;
-	}
-	for (l = i; l >= 0; l--)
-	{
-		num = rem + n1[l] - 48;
-		if (num > 9)
-		{
-			num = num - 10;
-			rem = 1;
-		}
-		else
-		{
-			rem = 0;
-		}
-		d[l] = num;
-	}
-	if (rem == 1)
-		d[0] += 10;
-	i = 0;
-	j = 0;
-	if (d[0] > 9)
-	{
-		res[1] = (d[0] % 10) + 48;
-		res[0] = 49;
-		j = 2;
-		i = 1;
-	}
-	while (i < len1)
-	{
-		res[j] = d[i] + 48;
-		i++;
-		j++;
-	}
-	res[i + 1] = '\0';
-
-	return (res);
 }
