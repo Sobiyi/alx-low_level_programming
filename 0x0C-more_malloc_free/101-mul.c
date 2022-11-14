@@ -14,7 +14,7 @@ char *add_numbers(char *n1, char *n2, int len1, int len2);
  */
 int main(int argc, char *argv[])
 {
-	char *r, mul, *res = "";
+	char *r, *mul, *res = "";
 
 	int i, j, len;
 
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 }
 
 /**
- * find_powwe_mul - finds how many zeros to add to a number and adds it
+ * find_power_mul - finds how many zeros to add to a number and adds it
  * @n: number of zeros
  * @s: the string to add the zeros
  *
@@ -145,7 +145,7 @@ char *mul_digit(char *s, char digit)
 
 /**
  * add_numbers - adds two strings
- * @n1: the second string
+ * @n1: the first string
  * @n2: the second string
  * @len1: length of the first string
  * @len2: length of the second string
