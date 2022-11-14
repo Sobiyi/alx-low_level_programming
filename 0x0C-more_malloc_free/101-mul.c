@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 /**
- * is_digit - cheacks if a string contains a non-digit char
- * @s: sring to be evaluated
- * Return: 0 if a non-digit is found, 1 if otherwise
+ * is_digit - checks if a string contains a non-digit char
+ * @s: string to be evaluated
+ * Return: 0 if a non-digit is found, 1 otherwise
  */
 int is_digit(char *s)
 {
@@ -21,7 +21,7 @@ int is_digit(char *s)
 }
 
 /**
- * _strlen _ returns the length of a string
+ * _strlen -  returns the length of a string
  * @s: string to evaluate
  * Return: the length of the string
  */
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 		errors();
 	len1 = _strlen(s1);
 	len2 = _strlen(s2);
-	len = len2 + len2 + 1;
+	len = len1 + len2 + 1;
 	result = malloc(sizeof(int) * len);
 	if (!result)
 		return (1);
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 		result[i] = 0;
 	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		digit1 = s1[len] - '0';
+		digit1 = s1[len1] - '0';
 		carry = 0;
 		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
 		{
